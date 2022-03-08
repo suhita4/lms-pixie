@@ -14,6 +14,9 @@ nav {
   align-items: center;
   padding: 0px 80px;
   height: 10vh;
+  z-index: 1000;
+  border-bottom: 1px solid;
+  border-color: #e9ecef;
 }
 
 .logo a {
@@ -26,7 +29,7 @@ nav {
 
 .register {
   display: flex;
-  text-decoration: none;
+  list-style: none;
 }
 
 .register a {
@@ -34,6 +37,7 @@ nav {
 }
 
 .signIn {
+  display: block;
   padding: 5px 22px;
   border: 2px solid;
   border-color: #1c7ed6;
@@ -47,6 +51,7 @@ nav {
 }
 
 .signUp {
+  display: block;
   padding: 7px 23px;
   border: none;
   color: #fff;
@@ -62,7 +67,7 @@ nav {
 }
 
 .wrapper {
-  height: 80vh;
+  height: 550px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -104,6 +109,7 @@ nav {
   color: #fff;
   box-shadow: 0px 4px 12px #1c7ed665;
   cursor: pointer;
+  z-index: 4000;
 }
 
 .CTA:hover {
@@ -112,4 +118,5 @@ nav {
 
 .heroImg {
   margin-top: 40px;
+  z-index: -10;
 }

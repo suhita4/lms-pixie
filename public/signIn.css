@@ -14,6 +14,8 @@ nav {
   align-items: center;
   padding: 0px 80px;
   height: 10vh;
+  border-bottom: 1px solid;
+  border-color: #e9ecef;
 }
 
 .logo a {
@@ -74,7 +76,11 @@ nav {
   border-radius: 4px;
 }
 
-.form button {
+.form a {
+  text-decoration: none;
+}
+
+.form .button {
   margin-top: 40px;
   border: none;
   background-color: #1c7ed6;
@@ -83,6 +89,7 @@ nav {
   font-weight: 500;
   padding: 10px 0px;
   border-radius: 8px;
+  text-align: center;
   width: 100%;
   cursor: pointer;
 }
