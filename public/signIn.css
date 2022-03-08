@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  color: #0E0F10;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 80px;
+  height: 10vh;
+}
+
+.logo a {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1c7ed6;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.signUp {
+  padding: 7px 23px;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: #1c7ed6;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.signUp:hover {
+  box-shadow: 0px 2px 8px #1c7ed650;
+}
+
+.wrapper {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70%;
+  width: 30%;
+}
+
+.form h1 {
+  margin-bottom: 5px;
+  color: #0E0F10;
+}
+
+.form label {
+  margin-top: 15px;
+  margin-bottom: 3px;
+  color: #0E0F10;
+}
+
+.form input {
+  padding: 6px 10px;
+  border: 1px solid;
+  border-color: #adb5bd;
+  border-radius: 4px;
+}
+
+.form button {
+  margin-top: 40px;
+  border: none;
+  background-color: #1c7ed6;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 0px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.redirect {
+  color: #0E0F10;
+}
+
+.redirect a {
+  color: #1c7ed6;
+  font-weight: 600;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/tasks.css">
+    <title>Task Manager</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo"><a href="/home.html">Pixie</a></div>
+      <div class="menu">
+        <a href="/course.html">Course</a>
+        <a href="/tasks.html" class="current">Tasks</a>
+        <a href="/dashboard.html">Dashboard</a>
+      </div>
+    </nav>
+    <div class="wrapper">
+      <div class="allTasks">
+        <div class="header">
+          <p class="heading">All tasks</p>
+          <a href="/tasks/add"><div class="create">Create Task</div></a>
+        </div>
+        <% if (tasks.length> 0) { tasks.forEach(task => {%>
+          <% if (task.completed==false) { %>
+            <a class="showDetails" href="/tasks/<%=task._id%>">
+              <h3 class="title">
+                <%=task.title%>
+              </h3>
+              <p class="incomplete">Incomplete</p>
+            </a>
+            <%} }); tasks.forEach(task=> { %>
+              <% if (task.completed==true) { %>
+                <a class="showDetails" href="/tasks/<%=task._id%>">
+                  <h3 class="title">
+                    <%=task.title%>
+                  </h3>
+                  <p class="complete">Completed</p>
+                </a>
+                <%} }); } else { %>
+                  <p class="noTasks">Yay! You completed all your tasks!</p>
+                <%}%>
+      </div>
+    </div>
+  </body>
+</html>

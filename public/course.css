@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  color: #0E0F10;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 80px;
+  height: 10vh;
+  border-bottom: 1px solid;
+  border-color: #e9ecef;
+}
+
+.logo a {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1c7ed6;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu a {
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+.current {
+  font-weight: 600;
+  color: #1c7ed6;
+}
+
+.wrapper {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+}
+
+.sidebar {
+  width: 45%;
+  overflow-y: scroll;
+}
+
+.title {
+  background-color: #212529;
+  color: #fff;
+  padding: 20px 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.week {
+  background-color: #e9ecef;
+  padding: 15px 20px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.lesson {
+  padding: 10px 20px;
+  border-bottom: 1px solid;
+  border-color: #e9ecef;
+  cursor: pointer;
+}
+
+.mainContent {
+  padding: 20px 40px;
+  overflow-y: scroll;
+}
+
+.mainContent h1 {
+  margin-bottom: 20px;
+}
+
+.mainContent p {
+  margin-bottom: 10px;
+  width: 90%;
+}
+
+.iframe {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  width: 90%;
+  justify-content: space-evenly;
+  margin-top: 80px;
+}
+
+.navbtn {
+  background-color: #e9ecef;
+  border: 2px solid;
+  border-color: #ced4da;
+  padding: 7px 0px;
+  border-radius: 6px;
+  text-align: center;
+  width: 190px;
+  cursor: pointer;
+}
+
+.complete {
+  background-color: #1c7ed6;
+  color: #fff;
+  padding: 7px 0px;
+  width: 190px;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+}

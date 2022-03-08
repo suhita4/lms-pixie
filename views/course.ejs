@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/course.css">
+  <title>Pixie | Course</title>
+</head>
+<body>
+  <nav>
+    <div class="logo"><a href="/home.html">Pixie</a></div>
+    <div class="menu">
+      <a href="/course.html" class="current">Course</a>
+      <a href="/tasks.html">Tasks</a>
+      <a href="/dashboard.html">Dashboard</a>
+    </div>
+  </nav>
+  <div class="wrapper">
+    <div class="sidebar">
+      <div class="title">Graphic Design</div>
+      <div class="week">Week 0: Getting Started</div>
+      <div class="lesson" onclick="displayContent(0)">Lesson 1: Typography</div>
+      <div class="lesson" onclick="displayContent(1)">Lesson 2: Color</div>
+      <div class="lesson" onclick="displayContent(2)">Lesson 3: Layout & Composition</div>
+      <div class="lesson" onclick="displayContent(3)">Lesson 4: Images</div>
+      <div class="lesson" onclick="displayContent(4)">Lesson 5: Fundamentals</div>
+      <div class="lesson" onclick="displayContent(5)">Lesson 6: Branding & Identity</div>
+    </div>
+    <div class="mainContent">
+      <h1 id="title">Lesson 1: Typography</h1>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur quam cumque odio illum asperiores optio sunt voluptas, eum necessitatibus soluta, incidunt recusandae quasi quod quas voluptatibus, reiciendis molestiae facilis saepe.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi dolorum atque, odio illum nobis voluptate!</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, magnam.</p>
+      <p class="iframe" id="iframe"><iframe width="560" height="315" src="https://www.youtube.com/embed/sByzHoiYFX0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></iframe></p>
+      <div class="buttons">
+        <!--<div class="navbtn">&#8592; Previous lesson</div>-->
+        <div class="complete">Mark Complete</div>
+        <!--<div class="navbtn">Next lesson &#8594;</div>-->
+      </div>
+    </div>
+  </div>
+  <script>
+    const lessons = [
+      {'title': 'Lesson 1: Typography'},
+      {'title': 'Lesson 2: Color'},
+      {'title': 'Lesson 3: Layout & Composition'},
+      {'title': 'Lesson 4: Images'},
+      {'title': 'Lesson 5: Fundamentals'},
+      {'title': 'Lesson 6: Branding & Identity'},
+    ];
+
+    const videos = [
+      '<iframe width="560" height="315" src="https://www.youtube.com/embed/sByzHoiYFX0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+      '<iframe width="560" height="315" src="https://www.youtube.com/embed/_2LLXnUdUIc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+      '<iframe width="560" height="315" src="https://www.youtube.com/embed/a5KYlHNKQB8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+      '<iframe width="560" height="315" src="https://www.youtube.com/embed/MELKuexR3sQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+      '<iframe width="560" height="315" src="https://www.youtube.com/embed/YqQx75OPRa0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+      '<iframe width="560" height="315" src="https://www.youtube.com/embed/l-S2Y3SF3mM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+    ];
+
+    function displayContent(number) {
+      let num = number
+      document.querySelector('#title').textContent = `${lessons[number].title}`;
+      document.querySelector('#iframe').innerHTML = `${videos[number]}`;
+    }
+  </script>
+</body>
+</html>

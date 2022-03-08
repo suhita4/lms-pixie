@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/tasks.css">
+    <title>Task Manager</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo"><a href="/home.html">Pixie</a></div>
+      <div class="menu">
+        <a href="/course.html">Course</a>
+        <a href="/tasks.html" class="current">Tasks</a>
+        <a href="/dashboard.html">Dashboard</a>
+      </div>
+    </nav>
+    <div class="wrapper">
+      <div class="taskContent">
+        <div class="header">
+          <p class="heading">Your task</p>
+          <a href="/tasks/add"><div class="create">Create Task</div></a>
+        </div>
+          <h2>
+            <%=task.title%>
+          </h2>
+            <p class="description">
+              <%=task.description%>
+            </p>
+        <div class="edit">
+          <a class="update" data-doc="<%=task._id%>">Mark Complete</a>
+          <a class="delete" data-doc="<%=task._id%>">Delete</a>
+        </div>
+      </div>
+    </div>
+      <script>
+        const update = document.querySelector('a.update');
+        update.addEventListener('click', (e) => {
+          const endpoint = `/tasks/${del.dataset.doc}`;
+
+          fetch(endpoint, {
+            method: 'PUT'
+          })
+            .then((response) => response.json())
+            .then((data) => window.location.href = data.redirect)
+            .catch(err => console.log(err));
+        });
+
+        const del = document.querySelector('a.delete');
+        del.addEventListener('click', (e) => {
+          const endpoint = `/tasks/${del.dataset.doc}`;
+
+          fetch(endpoint, {
+            method: 'DELETE'
+          })
+            .then((response) => response.json())
+            .then((data) => window.location.href = data.redirect)
+            .catch(err => console.log(err));
+        })
+      </script>
+  </body>
+</html>
