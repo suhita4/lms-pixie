@@ -102,3 +102,16 @@ nav {
   color: #1c7ed6;
   font-weight: 600;
 }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 80px;
+  margin-top: 10vh;
+  background-color: #0E0F10;
+}
+
+footer p {
+  color: #fff;
+}
