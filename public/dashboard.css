@@ -49,8 +49,22 @@ nav {
   width: 30%;
 }
 
-.userDetails h1 {
+.formheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 25px;
+}
+
+.logout {
+  text-decoration: none;
+  height: fit-content;
+  padding: 6px 20px;
+  background-color: #f03e3e;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 6px;
 }
 
 .userDetails input {
