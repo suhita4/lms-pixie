@@ -9,11 +9,11 @@ const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 
-const dbURI = 'mongodb+srv://stige:dashboard@pixie.dlpls.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://stige:database@pixie.dlpls.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
-    app.listen(process.env.PORT || 8000);
+    app.listen(process.env.PORT || 3000);
   })
   .catch(err => console.log(err));
 
@@ -42,6 +42,6 @@ app.get('/tasks', requireAuth, function (req, res) {
   res.render('tasks');
 });
 
-app.use('/tasks', taskRoutes);
+app.use(taskRoutes);
 
 app.use(authRoutes);

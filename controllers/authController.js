@@ -1,9 +1,10 @@
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
 
+// handle errors
 const handleErrors = (err) => {
   console.log(err.message, err.code);
-  let errors = { name: '', email: '', username: '', password: '', profile: '' };
+  let errors = { email: '', password: '' };
 
   // incorrect email
   if (err.message === 'incorrect email') {
@@ -17,7 +18,7 @@ const handleErrors = (err) => {
 
   // duplicate email error
   if (err.code === 11000) {
-    errors.email = 'Email address is already registered';
+    errors.email = 'Email address already registered';
     return errors;
   }
 
@@ -34,6 +35,7 @@ const handleErrors = (err) => {
   return errors;
 }
 
+// create json web token
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
   return jwt.sign({ id }, 'Pixie', {
@@ -46,7 +48,7 @@ module.exports.signup_get = (req, res) => {
   res.render('signup');
 }
 
-module.exports.login_get = (req, res) => {
+module.exports.signin_get = (req, res) => {
   res.render('signin');
 }
 
@@ -66,7 +68,7 @@ module.exports.signup_post = async (req, res) => {
  
 }
 
-module.exports.login_post = async (req, res) => {
+module.exports.signin_post = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -84,5 +86,5 @@ module.exports.login_post = async (req, res) => {
 
 module.exports.logout_get = (req, res) => {
   res.cookie('jwt', '', { maxAge: 1 });
-  res.redirect('/');
+  res.redirect('/signIn');
 }
