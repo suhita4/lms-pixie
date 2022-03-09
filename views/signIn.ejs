@@ -13,13 +13,17 @@
     <a href="/signUp"><button class="signUp">Sign up</button></a>
   </nav>
   <div class="wrapper">
-    <form action="" method="get" class="form">
+    <form action="/signin" method="post" class="form">
       <h1>Sign in</h1>
       <label for="">Email address</label>
       <input type="email" name="" id="" placeholder="example@email.com">
+      <div class="emailError"></div>
+
       <label for="">Password</label>
       <input type="password" name="" id="" placeholder="&#9679&#9679&#9679&#9679&#9679&#9679&#9679&#9679">
-      <a href="/dashboard"><div class="button">Sign in</div></a>
+      <div class="passwordError"></div>
+
+      <button type="submit" class="button">Sign in</button>
     </form>
     <div class="redirect">
       <p>Don't have an account? <a href="/signUp">Sign up</a></p>
@@ -29,5 +33,41 @@
     <div class="logo"><a href="/">Pixie</a></div>
     <p>Copyright 2022</p>
   </footer>
+
+  <script>
+    const form = document.querySelector('form');
+    const emailError = document.querySelector('.emailError');
+    const passwordError = document.querySelector('.passwordError');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      emailError.textContent = '';
+      passwordError.textContent = '';
+
+      const email = form.email.value;
+      const password = form.password.value;
+      try {
+        const res = await fetch('/signin', { 
+          method: 'POST', 
+          body: JSON.stringify({ email, password }),
+          headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.errors) {
+          emailError.textContent = data.errors.email;
+          passwordError.textContent = data.errors.password;
+        }
+        if (data.user) {
+          location.assign('/dashboard');
+        }
+      }
+      catch (err) {
+        console.log(err);
+      }
+    });
+  </script>
+
+
 </body>
 </html>

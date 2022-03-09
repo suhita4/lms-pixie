@@ -13,19 +13,29 @@
     <a href="/signIn"><button class="signIn">Sign in</button></a>
   </nav>
   <div class="wrapper">
-    <form action="" method="get" class="form">
+    <form action="/signup" method="post" class="form">
       <h1>Sign up</h1>
-      <label for="">Name</label>
-      <input type="text" name="" id="" placeholder="John Doe">
-      <label for="">Email address</label>
-      <input type="email" name="" id="" placeholder="example@email.com">
-      <label for="">Username</label>
-      <input type="text" name="" id="" placeholder="johndoe">
-      <label for="">Password</label>
-      <input type="password" name="" id="" placeholder="&#9679&#9679&#9679&#9679&#9679&#9679&#9679&#9679">
-      <label for="">Profile picture</label>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="" placeholder="John Doe">
+      <div class="nameError"></div>
+
+      <label for="email">Email address</label>
+      <input type="email" name="email" id="" placeholder="example@email.com">
+      <div class="emailError"></div>
+
+      <label for="username">Username</label>
+      <input type="text" name="username" id="" placeholder="johndoe">
+      <div class="usernameError"></div>
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="" placeholder="&#9679&#9679&#9679&#9679&#9679&#9679&#9679&#9679">
+      <div class="passwordError"></div>
+
+      <label for="profile">Profile picture</label>
       <input type="file" src="" alt="">
-      <a href="/dashboard"><div class="button">Sign up</div></a>
+      <div class="profileError"></div>
+
+      <button type="submit" class="button">Sign up</button>
     </form>
     <div class="redirect">
       <p>Already have an account? <a href="/signIn">Sign in</a></p>
@@ -35,5 +45,48 @@
     <div class="logo"><a href="/">Pixie</a></div>
     <p>Copyright 2022</p>
   </footer>
+
+  <script>
+    const form = document.querySelector('form');
+    const nameError = document.querySelector('.emailError');
+    const emailError = document.querySelector('.emailError');
+    const usernameError = document.querySelector('.emailError');
+    const passwordError = document.querySelector('.passwordError');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      nameError.textContent = '';
+      emailError.textContent = '';
+      usernameError.textContent = '';
+      passwordError.textContent = '';
+
+      const name = form.name.value;
+      const email = form.email.value;
+      const username = form.username.value;
+      const password = form.password.value;
+      try {
+        const res = await fetch('/signup', { 
+          method: 'POST', 
+          body: JSON.stringify({ name, email, username, password }),
+          headers: {'Content-Type': 'application/json'}
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.errors) {
+          nameError.textContent = data.errors.name;
+          emailError.textContent = data.errors.email;
+          usernameError.textContent = data.errors.username;
+          passwordError.textContent = data.errors.password;
+        }
+        if (data.user) {
+          location.assign('/dashboard');
+        }
+      }
+      catch (err) {
+        console.log(err);
+      }
+    });
+  </script>
+
 </body>
 </html>

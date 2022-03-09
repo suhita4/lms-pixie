@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const authRoutes = require('./routes/authRoutes');
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 const taskRoutes = require('./routes/taskRoutes');
 
@@ -22,29 +24,24 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
 
+app.get('*', checkUser);
 
 app.get('/', function (req, res) {
   res.render('home');
 });
 
-app.get('/signUp', function (req, res) {
-  res.render('signUp');
-});
-
-app.get('/signIn', function (req, res) {
-  res.render('signIn');
-});
-
-app.get('/dashboard', function (req, res) {
+app.get('/dashboard', requireAuth, function (req, res) {
   res.render('dashboard');
 });
 
-app.get('/course', function (req, res) {
+app.get('/course', requireAuth, function (req, res) {
   res.render('course');
 });
 
-app.get('/tasks', function (req, res) {
+app.get('/tasks', requireAuth, function (req, res) {
   res.render('tasks');
 });
 
 app.use('/tasks', taskRoutes);
+
+app.use(authRoutes);
