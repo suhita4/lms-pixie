@@ -1,73 +1,34 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-
 const Task = require('../models/task');
 
 const router = express.Router();
 
-function getUserId(req) {
-  const token = req.cookies.jwt;
-
-  if (token) {
-    let res = jwt.verify(token, 'User');
-    if (res.id) {
-      return res.id;
-    } else {
-      return null;
-    }
-  } else {
-    return null;
-  }
-}
-
 router.get('/tasks', (req, res) => {
+  Task.find().sort({ createdAt: -1 })
+    .then((result) => {
+      console.log("All tasks: ", result);
+      res.render('tasks', { title: 'Your Tasks', tasks: result });
+    })
+    .catch(err => console.log(err));
 
-  if (!getUserId(req)) {
-    res.redirect('/signIn');
-  }
-  else {
-    Task.find().sort({ createdAt: -1 })
-      .then((result) => {
-        console.log("All tasks: ", result);
-        res.render('../views/tasks', { title: 'All Tasks', tasks: result });
-      })
-      .catch(err => console.log(err));
-  }
 });
 
-router.get('/add', (req, res) => {
-  if (!getUserId(req)) {
-    res.redirect('./signIn');
-  } else {
-    res.render('../views/add', { title: 'Add a new task' });
-  }
+router.get('/tasks/add', (req, res) => {
+  res.render('add', { title: 'Add a new task' });
 });
 
-router.get('/:id', (req, res) => {
-
-  if (!getUserId(req)) {
-    res.redirect('/signIn');
-  }
+router.get('/tasks/:id', (req, res) => {
   const id = req.params.id;
   Task.findById(id)
     .then((result) => {
-      res.render('../views/detail', { title: 'task details', task: result });
+      res.render('detail', { title: 'Task details', task: result });
     })
     .catch(err => console.log(err));
 });
 
-
-router.post('/add', (req, res) => {
-
-  const userId = getUserId(req);
-  if (!userId) {
-    res.redirect('/signIn');
-  }
-
+router.post('/tasks', (req, res) => {
   const newTask = req.body;
-  newTask["userId"] = userId;
   newTask["completed"] = false;
-
   console.log(newTask);
   const task = new Task(newTask);
 
@@ -78,8 +39,7 @@ router.post('/add', (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.put('/:id', (req, res) => {
-
+router.put('/tasks/:id', (req, res) => {
   const task = new Task({
     _id: req.params.id,
     description: req.params.description,
@@ -91,18 +51,15 @@ router.put('/:id', (req, res) => {
       res.json({ redirect: '/tasks' })
     })
     .catch(err => console.log(err));
-
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/tasks/:id', (req, res) => {
   const id = req.params.id;
-
   Task.findByIdAndDelete(id)
     .then((results) => {
       res.json({ redirect: '/tasks' });
     })
     .catch(err => console.log(err));
-
 });
 
 module.exports = router;

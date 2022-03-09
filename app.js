@@ -3,19 +3,17 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 
-
 const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 
-const dbURI = 'mongodb+srv://stige:trial@lms.kkiqf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://stige:dashboard@pixie.dlpls.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
-    app.listen(process.env.PORT || 8080);
+    app.listen(process.env.PORT || 8000);
   })
   .catch(err => console.log(err));
-
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
