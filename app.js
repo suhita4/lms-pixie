@@ -38,10 +38,8 @@ app.get('/course', requireAuth, function (req, res) {
   res.render('course');
 });
 
-app.get('/tasks', requireAuth, function (req, res) {
-  res.render('tasks');
-});
-
-app.use(taskRoutes);
+app.use('/tasks', taskRoutes);
 
 app.use(authRoutes);
+//civixa5548@zneep.com
+//minachan

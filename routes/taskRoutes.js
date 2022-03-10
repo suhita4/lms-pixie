@@ -1,34 +1,56 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const Task = require('../models/task');
+const routes = express.Router();
 
-const router = express.Router();
+function getUserId(req) {
+  const token = req.cookies.jwt;
 
-router.get('/tasks', (req, res) => {
-  Task.find().sort({ createdAt: -1 })
-    .then((result) => {
-      console.log("All tasks: ", result);
-      res.render('tasks', { title: 'Your Tasks', tasks: result });
-    })
-    .catch(err => console.log(err));
+  if (token) {
+    let res = jwt.verify(token, 'Pixie');
+    if (res.id) {
+      return res.id;
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+}
 
+
+routes.get('/', (req, res) => {
+
+  if (!getUserId(req)) {
+    res.redirect('/signIn');
+  }
+  else {
+    Task.find().sort({ createdAt: -1 })
+      .then((result) => {
+        console.log("All tasks: ", result);
+        res.render('../views/tasks', { title: 'All Tasks', tasks: result });
+      })
+      .catch(err => console.log(err));
+  }
 });
 
-router.get('/tasks/add', (req, res) => {
-  res.render('add', { title: 'Add a new task' });
+routes.get('/add', (req, res) => {
+    res.render('../views/add', { title: 'add a new task' });
 });
 
-router.get('/tasks/:id', (req, res) => {
+routes.get('/:id', (req, res) => {
   const id = req.params.id;
   Task.findById(id)
     .then((result) => {
-      res.render('detail', { title: 'Task details', task: result });
+      res.render('../views/detail', { title: 'task details', task: result });
     })
     .catch(err => console.log(err));
 });
 
-router.post('/tasks', (req, res) => {
+routes.post('/', (req, res) => {
   const newTask = req.body;
   newTask["completed"] = false;
+
   console.log(newTask);
   const task = new Task(newTask);
 
@@ -39,7 +61,8 @@ router.post('/tasks', (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.put('/tasks/:id', (req, res) => {
+routes.put('/:id', (req, res) => {
+
   const task = new Task({
     _id: req.params.id,
     description: req.params.description,
@@ -51,15 +74,18 @@ router.put('/tasks/:id', (req, res) => {
       res.json({ redirect: '/tasks' })
     })
     .catch(err => console.log(err));
+
 });
 
-router.delete('/tasks/:id', (req, res) => {
+routes.delete('/:id', (req, res) => {
   const id = req.params.id;
+
   Task.findByIdAndDelete(id)
     .then((results) => {
       res.json({ redirect: '/tasks' });
     })
     .catch(err => console.log(err));
+
 });
 
-module.exports = router;
+module.exports = routes;

@@ -19,9 +19,9 @@
       <div class="allTasks">
         <div class="header">
           <p class="heading">All tasks</p>
-          <a href="/add"><div class="create">Create Task</div></a>
+          <a href="/tasks/add"><div class="create">Create Task</div></a>
         </div>
-        <% if (task.length> 0) { task.forEach(task => {%>
+        <% if (tasks.length> 0) { tasks.forEach(task => {%>
           <% if (task.completed==false) { %>
             <a class="showDetails" href="/tasks/<%=task._id%>">
               <h3 class="title">
