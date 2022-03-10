@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
+const { findOneAndUpdate } = require("../models/User");
 
 // handle errors
 const handleErrors = (err) => {
@@ -92,18 +93,17 @@ module.exports.update_get = (req, res) => {
 }
 
 module.exports.update_post = async (req, res) => {
-  const { name, email, username, password } = req.body;
-
-  try {
-    const user = await User.create({ name, email, username, password });
+  const user =  User({
+    _id: req.params.id,
+  });
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user: user._id });
-  }
-  catch(err) {
-    const errors = handleErrors(err);
-    res.status(400).json({ errors });
-  }
+    await User.updateOne({ _id: req.params.id }, user)
+    .then((result) => {
+      res.json({ redirect: '/dashboard' })
+    })
+    .catch(err => console.log(err));
  
 }
 

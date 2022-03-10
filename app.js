@@ -38,8 +38,7 @@ app.get('/course', requireAuth, function (req, res) {
   res.render('course');
 });
 
-app.use('/tasks', taskRoutes);
-
 app.use(authRoutes);
+app.use('/tasks', taskRoutes);
 //civixa5548@zneep.com
 //minachan

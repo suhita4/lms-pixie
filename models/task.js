@@ -13,7 +13,10 @@ const taskSchema = new Schema({
     },
   completed: {
       type: Boolean
-    }
+    },
+  deadline: {
+    type: Date
+  }
 }, { timestamps: true });
 
 const Task = mongoose.model('Task', taskSchema);
