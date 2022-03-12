@@ -15,6 +15,7 @@ const dbURI = 'mongodb+srv://stige:database@pixie.dlpls.mongodb.net/myFirstDatab
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     app.listen(process.env.PORT || 3000);
+    console.log("Listening on port 3000");
   })
   .catch(err => console.log(err));
 

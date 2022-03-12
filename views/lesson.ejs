@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/course.css">
+  <link rel="shortcut icon" href="/img/logo.svg" type="image/x-icon">
   <title>Pixie | Course</title>
 </head>
 <body>
@@ -36,21 +37,19 @@
       <p class="iframe" id="iframe"><%-course.iframe%></p>
       <div class="buttons">
       <a class="incomplete" data-doc="<%=course._id%>">Mark Complete</a></div>
-      <a class="delete" data-doc="<%=course._id%>">Delete</a>
       <%} else { %>
           <h1 id="title"><%=course.title%></h1>
           <p id="description"><%-course.description%></p>
           <p class="iframe" id="iframe"><%-course.iframe%></p>
           <div class="buttons">
           <a class="complete" data-doc="<%=course._id%>">Lesson completed</a></div>
-          <a class="delete" data-doc="<%=course._id%>">Delete</a>
         <%}%>
     </div>
   </div>
   <script>
     const incomplete = document.querySelector('a.incomplete');
     incomplete.addEventListener('click', (e) => {
-      const endpoint = `/course/${del.dataset.doc}`;
+      const endpoint = `/course/${incomplete.dataset.doc}`;
 
       fetch(endpoint, {
         method: 'PUT'
@@ -59,18 +58,6 @@
         .then((data) => window.location.href = data.redirect)
         .catch(err => console.log(err));
     });
-
-    const del = document.querySelector('a.delete');
-    del.addEventListener('click', (e) => {
-      const endpoint = `/course/${del.dataset.doc}`;
-
-      fetch(endpoint, {
-        method: 'DELETE'
-      })
-        .then((response) => response.json())
-        .then((data) => window.location.href = data.redirect)
-        .catch(err => console.log(err));
-    })
   </script>
 </body>
 </html>

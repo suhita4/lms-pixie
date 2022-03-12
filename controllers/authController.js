@@ -2,28 +2,23 @@ const User = require("../models/User");
 const jwt = require('jsonwebtoken');
 const { findOneAndUpdate } = require("../models/User");
 
-// handle errors
 const handleErrors = (err) => {
   console.log(err.message, err.code);
   let errors = { email: '', password: '' };
 
-  // incorrect email
   if (err.message === 'incorrect email') {
     errors.email = 'Email address not registered';
   }
 
-  // incorrect password
   if (err.message === 'incorrect password') {
     errors.password = 'Password incorrect';
   }
 
-  // duplicate email error
   /*if (err.code === 11000) {
     errors.email = 'Email address already registered';
     return errors;
   }*/
 
-  // validation errors
   if (err.message.includes('user validation failed')) {
     Object.values(err.errors).forEach(({ properties }) => {
       errors[properties.path] = properties.message;
@@ -38,12 +33,8 @@ const updateErrors = (err) => {
   console.log(err.message, err.code);
   let errors = { email: '', password: '' };
 
-  // validation errors
   if (err.message.includes('user validation failed')) {
-    // console.log(err);
     Object.values(err.errors).forEach(({ properties }) => {
-      // console.log(val);
-      // console.log(properties);
       errors[properties.path] = properties.message;
     });
   }
@@ -51,8 +42,6 @@ const updateErrors = (err) => {
   return errors;
 }
 
-
-// create json web token
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
   return jwt.sign({ id }, 'Pixie', {
@@ -60,7 +49,6 @@ const createToken = (id) => {
   });
 };
 
-// controller actions
 module.exports.signup_get = (req, res) => {
   res.render('signup');
 }
