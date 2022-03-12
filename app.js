@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 const taskRoutes = require('./routes/taskRoutes');
+const courseRoutes = require('./routes/courseRoutes');
 
 const app = express();
 
@@ -34,11 +35,8 @@ app.get('/dashboard', requireAuth, function (req, res) {
   res.render('dashboard');
 });
 
-app.get('/course', requireAuth, function (req, res) {
-  res.render('course');
-});
-
 app.use(authRoutes);
 app.use('/tasks', taskRoutes);
+app.use('/course', courseRoutes)
 //civixa5548@zneep.com
 //minachan

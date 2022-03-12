@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/course.css">
+    <title>Pixie | Add task</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo"><a href="/">Pixie</a></div>
+      <div class="menu">
+        <a href="/course" class="current">Course</a>
+        <a href="/tasks">Tasks</a>
+        <a href="/dashboard">Dashboard</a>
+      </div>
+    </nav>
+    <div class="wrapper">
+      <div class="addTask">
+        <p class="heading">New task</p>
+        <form action="/course" method="POST" class="newTask">
+          <label for="title">Task Title</label>
+          <input type="text" id="title" required name="title" />
+          <label for="title">Task Description</label>
+          <textarea id="description" required name="description"></textarea>
+          <label for="iframe">Iframe</label>
+          <textarea id="iframe" required name="iframe"></textarea>
+          <button>Create lesson</button>
+        </form>
+      </div>
+    </div>
+    <footer>
+      <div class="logo"><a href="/">Pixie</a></div>
+      <p>Copyright 2022</p>
+    </footer>
+  </body>
+</html>

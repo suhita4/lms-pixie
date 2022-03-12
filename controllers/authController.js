@@ -18,17 +18,14 @@ const handleErrors = (err) => {
   }
 
   // duplicate email error
-  if (err.code === 11000) {
+  /*if (err.code === 11000) {
     errors.email = 'Email address already registered';
     return errors;
-  }
+  }*/
 
   // validation errors
   if (err.message.includes('user validation failed')) {
-    // console.log(err);
     Object.values(err.errors).forEach(({ properties }) => {
-      // console.log(val);
-      // console.log(properties);
       errors[properties.path] = properties.message;
     });
   }
@@ -92,18 +89,19 @@ module.exports.update_get = (req, res) => {
   res.render('dashboard');
 }
 
-module.exports.update_post = async (req, res) => {
-  const user =  User({
-    _id: req.params.id,
-  });
+module.exports.signup_post = async (req, res) => {
+  const { name, email, username, password } = req.body;
+
+  try {
+    const user = await User.create({ name, email, username, password });
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user: user._id });
-    await User.updateOne({ _id: req.params.id }, user)
-    .then((result) => {
-      res.json({ redirect: '/dashboard' })
-    })
-    .catch(err => console.log(err));
+  }
+  catch(err) {
+    const errors = updateErrors(err);
+    res.status(400).json({ errors });
+  }
  
 }
 

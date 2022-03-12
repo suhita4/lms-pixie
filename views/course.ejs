@@ -20,24 +20,30 @@
     <div class="sidebar">
       <div class="title">Graphic Design</div>
       <div class="week">Week 0: Getting Started</div>
-      <div class="lesson" onclick="displayContent(0)">Lesson 1: Typography</div>
-      <div class="lesson" onclick="displayContent(1)">Lesson 2: Color</div>
-      <div class="lesson" onclick="displayContent(2)">Lesson 3: Layout & Composition</div>
-      <div class="lesson" onclick="displayContent(3)">Lesson 4: Images</div>
-      <div class="lesson" onclick="displayContent(4)">Lesson 5: Fundamentals</div>
-      <div class="lesson" onclick="displayContent(5)">Lesson 6: Branding & Identity</div>
+      <% courses.forEach(course => {%>
+      <a href="/course/<%=course._id%>"> <div class="lesson"><%=course.title%></div></a>
+      <% }); %>
     </div>
-    <form class="mainContent">
+    <div class="mainContent">
       <h1 id="title">Hi there, <%= user.name %></h1>
       <p id="desc">Glad to see you checked in today. Remember to check in everyday! New lessons are added everyday. <br> <br> 
       Welcome to this course. We hope you are ready to level up your design skills and get placed in 6 months. <br> <br> 
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, magnam.</p>
       <p class="iframe" id="iframe"></p>
       <div class="buttons" id="buttons"></div>
-    </form>
+      <!--Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam inventore, nemo dolores ipsa delectus architecto corrupti enim, neque, aut explicabo fuga blanditiis. Consequatur, eveniet impedit.<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque exercitationem ipsa nobis deserunt architecto quibusdam?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, magnam.--> 
+      <!--
+        622c6af5bb98476884ea2f00
+        622c6ad4bb98476884ea2efb
+        622c6aaebb98476884ea2ef6
+        622c6a8ebb98476884ea2ef1
+        622c6a5bbb98476884ea2eec
+        622c68506db2a69456b670e7
+      -->
+    </div>
   </div>
   <script>
-    const lessons = [
+    /*const lessons = [
       {'title': 'Lesson 1: Typography'},
       {'title': 'Lesson 2: Color'},
       {'title': 'Lesson 3: Layout & Composition'},
@@ -48,10 +54,15 @@
 
     const videos = [
       '<iframe width="560" height="315" src="https://www.youtube.com/embed/sByzHoiYFX0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+
       '<iframe width="560" height="315" src="https://www.youtube.com/embed/_2LLXnUdUIc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+
       '<iframe width="560" height="315" src="https://www.youtube.com/embed/a5KYlHNKQB8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+
       '<iframe width="560" height="315" src="https://www.youtube.com/embed/MELKuexR3sQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+
       '<iframe width="560" height="315" src="https://www.youtube.com/embed/YqQx75OPRa0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+
       '<iframe width="560" height="315" src="https://www.youtube.com/embed/l-S2Y3SF3mM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
     ];
 
@@ -64,7 +75,7 @@
       document.querySelector('#iframe').innerHTML = `${videos[number]}`;
       document.querySelector('#desc').innerHTML = `${desc}`;
       document.querySelector('#buttons').innerHTML = `${complete}`;
-    }
+    }*/
   </script>
 </body>
 </html>

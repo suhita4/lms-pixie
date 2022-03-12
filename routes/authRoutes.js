@@ -9,8 +9,6 @@ router.post('/signup', authController.signup_post);
 router.get('/signin', authController.signin_get);
 router.post('/signin', authController.signin_post);
 router.get('/logout', authController.logout_get);
-router.get('/dashboard', authController.update_get);
-router.get('/update', authController.update_post);
 
 
 /*router.put('/dashboard', (req, res) => {

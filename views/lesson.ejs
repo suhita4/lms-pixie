@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/course.css">
+  <title>Pixie | Course</title>
+</head>
+<body>
+  <nav>
+    <div class="logo"><a href="/">Pixie</a></div>
+    <div class="menu">
+      <a href="/course" class="current">Course</a>
+      <a href="/tasks">Tasks</a>
+      <a href="/dashboard">Dashboard</a>
+    </div>
+  </nav>
+  <div class="wrapper"> 
+    <div class="sidebar">
+      <a href="/course">
+        <div class="title"><img src="/img/back.svg" alt=""> Graphic Design</div>
+      </a>
+      <div class="week">Week 0: Getting Started</div>
+      <a href="/course/622c6af5bb98476884ea2f00"> <div class="lesson">Lesson 1: Typography</div></a>
+      <a href="/course/622c6ad4bb98476884ea2efb"> <div class="lesson">Lesson 2: Color</div></a>
+      <a href="/course/622c6aaebb98476884ea2ef6"> <div class="lesson">Lesson 3: Layout & Composition</div></a>
+      <a href="/course/622c6a8ebb98476884ea2ef1"> <div class="lesson">Lesson 4: Images</div></a>
+      <a href="/course/622c6a5bbb98476884ea2eec"> <div class="lesson">Lesson 5: Fundamentals</div></a>
+      <a href="/course/622c68506db2a69456b670e7"> <div class="lesson">Lesson 6: Branding & Identity</div></a>
+    </div>
+    <div class="mainContent">
+      <% if (course.completed==false) {%>
+      <h1 id="title"><%=course.title%></h1>
+      <p id="description"><%-course.description%></p>
+      <p class="iframe" id="iframe"><%-course.iframe%></p>
+      <div class="buttons">
+      <a class="incomplete" data-doc="<%=course._id%>">Mark Complete</a></div>
+      <a class="delete" data-doc="<%=course._id%>">Delete</a>
+      <%} else { %>
+          <h1 id="title"><%=course.title%></h1>
+          <p id="description"><%-course.description%></p>
+          <p class="iframe" id="iframe"><%-course.iframe%></p>
+          <div class="buttons">
+          <a class="complete" data-doc="<%=course._id%>">Lesson completed</a></div>
+          <a class="delete" data-doc="<%=course._id%>">Delete</a>
+        <%}%>
+    </div>
+  </div>
+  <script>
+    const incomplete = document.querySelector('a.incomplete');
+    incomplete.addEventListener('click', (e) => {
+      const endpoint = `/course/${del.dataset.doc}`;
+
+      fetch(endpoint, {
+        method: 'PUT'
+      })
+        .then((response) => response.json())
+        .then((data) => window.location.href = data.redirect)
+        .catch(err => console.log(err));
+    });
+
+    const del = document.querySelector('a.delete');
+    del.addEventListener('click', (e) => {
+      const endpoint = `/course/${del.dataset.doc}`;
+
+      fetch(endpoint, {
+        method: 'DELETE'
+      })
+        .then((response) => response.json())
+        .then((data) => window.location.href = data.redirect)
+        .catch(err => console.log(err));
+    })
+  </script>
+</body>
+</html>
