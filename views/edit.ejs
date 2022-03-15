@@ -4,49 +4,54 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/signUp.css">
+  <link rel="stylesheet" href="/dashboard.css">
   <link rel="shortcut icon" href="/img/logo.svg" type="image/x-icon">
-  <title>Pixie | Sign Up</title>
+  <title>Pixie | Update details</title>
 </head>
 <body>
   <nav>
     <div class="logo"><a href="/">Pixie</a></div>
-    <a href="/signIn"><button class="signIn">Sign in</button></a>
+    <div class="menu">
+      <a href="/course">Course</a>
+      <a href="/tasks">Tasks</a>
+      <a href="/dashboard" class="current">Dashboard</a>
+    </div>
   </nav>
   <div class="wrapper">
-    <form action="/signup" method="post" class="form" enctype="multipart/form-data">
-      <h1>Sign up</h1>
+    <form action="/edit/<%=user._id%>" method="post" class="userDetails">
+      <div class="formheader">
+        <h1>Update details</h1>
+      </div>
+      <% if (user.profile) { %>
+        <img src="/uploads/<%= user.profile %>" alt="profile image" class="profile">
+      <% } %>
+
       <label for="name">Name</label>
-      <input type="text" name="name" id="" placeholder="John Doe" required>
+      <input type="text" name="name" id="name" value="<%= user.name %>">
       <div class="nameError"></div>
 
-      <label for="email">Email address</label>
-      <input type="email" name="email" id="" placeholder="example@email.com" required>
+      <label for="email">Email addrress</label>
+      <input type="email" name="email" id="email" value="<%= user.email %>">
       <div class="emailError"></div>
 
       <label for="username">Username</label>
-      <input type="text" name="username" id="" placeholder="johndoe" required>
+      <input type="text" name="username" id="username" value="<%= user.username %>">
       <div class="usernameError"></div>
 
       <label for="password">Password</label>
-      <input type="password" name="password" id="" placeholder="&#9679&#9679&#9679&#9679&#9679&#9679&#9679&#9679" required>
+      <input type="password" name="password" id="password" value="<%= user.password%>">
       <div class="passwordError"></div>
-<!--
-      <label for="profile">Profile picture</label>
-      <input type="file" src="" alt="" name="profile">
-      <div class="profileError"></div>-->
 
-      <button type="submit" class="button">Sign up</button>
+      <div class="buttons">
+        <button type="submit" class="update">Edit</button>
+        <button type="reset" class="reset">Reset</button>
+      </div>
     </form>
-    <div class="redirect">
-      <p>Already have an account? <a href="/signIn">Sign in</a></p>
-    </div>
   </div>
   <footer>
     <div class="logo"><a href="/">Pixie</a></div>
     <p>Copyright 2022</p>
   </footer>
-
   <script>
     const form = document.querySelector('form');
     const nameError = document.querySelector('.nameError');
@@ -67,7 +72,7 @@
       const password = form.password.value;
 
       try {
-        const res = await fetch('/signup', { 
+        const res = await fetch('/edit/:id', { 
           method: 'POST', 
           body: JSON.stringify({ name, email, username, password }),
           headers: {'Content-Type': 'application/json'}
@@ -89,6 +94,5 @@
       }
     });
   </script>
-
 </body>
 </html>

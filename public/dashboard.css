@@ -8,6 +8,10 @@
   color: #0E0F10;
 }
 
+a {
+  text-decoration: none;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -51,20 +55,13 @@ nav {
 
 .formheader {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
 }
 
-.logout {
-  text-decoration: none;
-  height: fit-content;
-  padding: 6px 20px;
-  background-color: #f03e3e;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  border-radius: 6px;
+.profile {
+  height: 100px;
+  align-self: center;
 }
 
 .userDetails input {
@@ -80,10 +77,36 @@ nav {
 }
 
 .buttons {
-  margin-top: 40px;
+  margin-top: 35px;
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.edit {
+  width: 49%;
+  border: none;
+  background-color: #1c7ed6;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 0px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.logout {
+  text-decoration: none;
+  height: fit-content;
+  padding: 10px 0px;
+  width: 49%;
+  text-align: center;
+  background-color: #f03e3e;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 6px;
 }
 
 .update {
@@ -98,7 +121,7 @@ nav {
   cursor: pointer;
 }
 
-.cancel {
+.reset {
   width: 49%;
   border: none;
   background-color: #e9ecef;

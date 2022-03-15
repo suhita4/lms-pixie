@@ -3,13 +3,33 @@ const jwt = require('jsonwebtoken');
 const Course = require('../models/course');
 const router = express.Router();
 
+function getUserId(req) {
+  const token = req.cookies.jwt;
+
+  if (token) {
+    let res = jwt.verify(token, 'Pixie');
+    if (res.id) {
+      return res.id;
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+}
+
 router.get('/', (req, res) => {
+  if (!getUserId(req)) {
+    res.redirect('/signIn');
+  }
+  else {
   Course.find().sort({ createdAt: -1 })
       .then((result) => {
         console.log("All lessons: ", result);
         res.render('../views/course', { title: 'All lessons', courses: result });
       })
       .catch(err => console.log(err));
+    }
 });
 
 router.get('/:id', (req, res) => {
@@ -31,7 +51,7 @@ router.put('/:id', (req, res) => {
 
   Course.updateOne({ _id: req.params.id }, course)
     .then((result) => {
-      res.json({ redirect: '/course' })
+      res.json({ redirect: '/course/:id' })
     })
     .catch(err => console.log(err));
 

@@ -18,31 +18,32 @@
     </div>
   </nav>
   <div class="wrapper">
-    <form class="userDetails" action="/signup" method="post">
+    <form class="userDetails">
       <div class="formheader">
         <h1>Account details</h1>
-        <a href="/logout" class="logout">Log out</a>
       </div>
-      <!--<input type="file" src="" alt="Profile photo">-->
+      <% if (user.profile) { %>
+        <img src="/uploads/<%= user.profile %>" alt="profile image" class="profile">
+      <% } %>
       <label for="name">Name</label>
-      <input type="text" name="name" id="name" value="<%= user.name %>">
+      <input type="text" name="name" id="name" value="<%= user.name %>" readonly>
       <div class="nameError"></div>
 
       <label for="email">Email addrress</label>
-      <input type="email" name="email" id="email" value="<%= user.email %>">
+      <input type="email" name="email" id="email" value="<%= user.email %>" readonly>
       <div class="emailError"></div>
 
       <label for="username">Username</label>
-      <input type="text" name="username" id="username" value="<%= user.username %>">
+      <input type="text" name="username" id="username" value="<%= user.username %>" readonly>
       <div class="usernameError"></div>
 
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" value=<%= user.password %>">
+      <input type="password" name="password" id="password" value="<%= user.password%>" readonly>
       <div class="passwordError"></div>
 
       <div class="buttons">
-        <button type="submit" class="update">Update</button>
-        <button type="reset" class="cancel">Cancel</button>
+        <a href="/edit/<%=user._id%>" class="edit">Edit</a>
+        <a href="/logout" class="logout">Log out</a>
       </div>
     </form>
   </div>
@@ -50,46 +51,5 @@
     <div class="logo"><a href="/">Pixie</a></div>
     <p>Copyright 2022</p>
   </footer>
-  <script>
-    const form = document.querySelector('form');
-    const nameError = document.querySelector('.nameError');
-    const emailError = document.querySelector('.emailError');
-    const usernameError = document.querySelector('.usernameError');
-    const passwordError = document.querySelector('.passwordError');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      nameError.textContent = '';
-      emailError.textContent = '';
-      usernameError.textContent = '';
-      passwordError.textContent = '';
-
-      const name = form.name.value;
-      const email = form.email.value;
-      const username = form.username.value;
-      const password = form.password.value;
-      try {
-        const res = await fetch('/signup', { 
-          method: 'POST', 
-          body: JSON.stringify({ name, email, username, password }),
-          headers: {'Content-Type': 'application/json'}
-        });
-        const data = await res.json();
-        console.log(data);
-        if (data.errors) {
-          nameError.textContent = data.errors.name;
-          emailError.textContent = data.errors.email;
-          usernameError.textContent = data.errors.username;
-          passwordError.textContent = data.errors.password;
-        }
-        if (data.user) {
-          location.assign('/signIn');
-        }
-      }
-      catch (err) {
-        console.log(err);
-      }
-    });
-  </script>
 </body>
 </html>
