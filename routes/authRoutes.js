@@ -1,8 +1,6 @@
 const authController = require('../controllers/authController');
 const { Router } = require('express');
 const router = Router();
-const User = require('../models/User');
-const { findByIdAndUpdate } = require("../models/User");
 
 router.get('/signup', authController.signup_get);
 router.post('/signup', authController.signup_post);

@@ -39,5 +39,3 @@ app.get('/dashboard', requireAuth, function (req, res) {
 app.use(authRoutes);
 app.use('/tasks', taskRoutes);
 app.use('/course', courseRoutes)
-//civixa5548@zneep.com
-//minachan
